@@ -1,6 +1,7 @@
 
 import './App.css'
 import Sidebar from './components/Layout/Sidebar'
+import Header from './components/Layout/Header'
 
 function App() {
  
@@ -11,6 +12,10 @@ function App() {
           <div className='flex h-screen overflow-hidden'>
               {/* Sidebar */}
               <Sidebar />
+              <div className='flex-1 flex flex-col overflow-hidden'>
+                  {/* Header */}
+                  <Header />
+              </div>
           </div>
       </div>
     </>
