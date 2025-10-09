@@ -22,8 +22,8 @@ function ProfileDropdown({ isOpen, onClose, theme }) {
     >
       {/* Kullanıcı Bilgisi Bölümü */}
       <div className={`p-4 border-b ${isDark ? 'border-slate-700' : 'border-slate-200'}`}>
-        <p className={`font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Musharof Chowdhury</p>
-        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>randomuser@pimjo.com</p>
+        <p className={`font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Terry Franci</p>
+        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>randomuser@prism.com</p>
       </div>
 
      

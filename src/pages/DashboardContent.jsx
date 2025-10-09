@@ -1,5 +1,7 @@
 import React from 'react';
 import StatCard from '../components/StatCard';
+import StatisticsChart from '../components/Charts/StatisticsChart';
+import DemographicsMap from '../components/Charts/DemographicsMap';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const monthlySalesData = [
@@ -17,7 +19,8 @@ const monthlyTargetData = [
   { name: 'Remaining', value: 25 },
 ];
 
-function DashboardContent({ theme, isDark }) {
+function DashboardContent({ theme }) {
+  const isDark = theme === 'dark';
   const pieTrailColor = isDark ? '#334155' : '#E5E7EB';
   const axisTickColor = isDark ? '#94a3b8' : '#64748b';
   const tooltipBackgroundColor = isDark ? '#1e293b' : '#ffffff';
@@ -106,6 +109,22 @@ function DashboardContent({ theme, isDark }) {
           </div>
         </div>
       </div>
+
+      <div className="mt-8">
+        <StatisticsChart isDark={isDark} />
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div className="lg:col-span-1">
+            <DemographicsMap isDark={isDark} />
+        </div>
+        
+        <div className="lg:col-span-2">
+            {/* Boş Alan */}
+        </div>
+      </div>
+
     </main>
   );
 }
