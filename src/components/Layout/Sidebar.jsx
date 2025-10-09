@@ -1,12 +1,13 @@
 import React from 'react';
-// DEĞİŞİKLİK 1: Gerekli ikonlar ve Link bileşeni import edildi
-import { Zap, LayoutDashboard, Users, ShoppingCart, BarChart3, Settings, LogOut, Calendar } from 'lucide-react';
+
+import { Zap, LayoutDashboard, Users, ShoppingCart, BarChart3, Settings, LogOut, Calendar , User} from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-// Navigasyon öğelerinin linkleri (href) güncellendi
+
 const navItems = [
   { name: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
   { name: 'Calendar', icon: Calendar, href: '/calendar'},
+  { name: 'Profile', icon: User, href: '/profile' },
   { name: 'Customers', icon: Users, href: '/customers' },
   { name: 'Orders', icon: ShoppingCart, href: '/orders' },
   { name: 'Analytics', icon: BarChart3, href: '/analytics' },
@@ -14,21 +15,18 @@ const navItems = [
 
 const bottomNavItems = [
   { name: 'Settings', icon: Settings, href: '/settings' },
-  { name: 'Logout', icon: LogOut, href: '/logout' }, // Logout için de bir yol belirlemek iyi bir pratiktir
+  { name: 'Logout', icon: LogOut, href: '/logout' }, 
 ];
 
-// DEĞİŞİKLİK 2: Artık gereksiz propları almıyoruz
+
 function Sidebar({ isSidebarOpen, theme }) {
   const isDark = theme === 'dark';
-  const location = useLocation(); // O anki URL bilgisini alır
-
+  const location = useLocation(); 
   const NavLink = ({ item }) => {
-    // Aktif linki URL'e göre belirle
+    
     const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
-
     return (
       <li>
-        {/* DEĞİŞİKLİK 3: <a> etiketi yerine <Link> kullanıldı */}
         <Link
           to={item.href}
           className={`
