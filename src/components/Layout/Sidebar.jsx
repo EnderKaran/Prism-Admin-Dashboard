@@ -1,55 +1,64 @@
 import React from 'react';
-import { Zap, LayoutDashboard, Users, ShoppingCart, BarChart3, Settings, LogOut } from 'lucide-react';
+// DEĞİŞİKLİK 1: Gerekli ikonlar ve Link bileşeni import edildi
+import { Zap, LayoutDashboard, Users, ShoppingCart, BarChart3, Settings, LogOut, Calendar } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
+// Navigasyon öğelerinin linkleri (href) güncellendi
 const navItems = [
-  { name: 'Dashboard', icon: LayoutDashboard, href: '#' },
-  { name: 'Customers', icon: Users, href: '#' },
-  { name: 'Orders', icon: ShoppingCart, href: '#' },
-  { name: 'Analytics', icon: BarChart3, href: '#' },
+  { name: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
+  { name: 'Calendar', icon: Calendar, href: '/calendar'},
+  { name: 'Customers', icon: Users, href: '/customers' },
+  { name: 'Orders', icon: ShoppingCart, href: '/orders' },
+  { name: 'Analytics', icon: BarChart3, href: '/analytics' },
 ];
 
 const bottomNavItems = [
-  { name: 'Settings', icon: Settings, href: '#' },
-  { name: 'Logout', icon: LogOut, href: '#' },
+  { name: 'Settings', icon: Settings, href: '/settings' },
+  { name: 'Logout', icon: LogOut, href: '/logout' }, // Logout için de bir yol belirlemek iyi bir pratiktir
 ];
 
-function Sidebar({ isSidebarOpen, activeItem, setActiveItem, isDark }) {
-  const NavLink = ({ item }) => (
-    <li>
-      <a
-        href={item.href}
-        onClick={(e) => {
-          e.preventDefault();
-          setActiveItem(item.name);
-        }}
-        className={`
-          flex items-center space-x-3 px-4 py-2.5 rounded-lg transition-all duration-200
-          ${activeItem === item.name
-            ? 'bg-indigo-600 text-white font-semibold shadow-lg hover:bg-indigo-700'
-            : isDark 
-              ? 'text-slate-300 hover:bg-slate-800/50' 
-              : 'text-slate-600 hover:bg-slate-100'
-          }
-        `}
-      >
-        <item.icon className='w-5 h-5' />
-        <span>{item.name}</span>
-      </a>
-    </li>
-  );
+// DEĞİŞİKLİK 2: Artık gereksiz propları almıyoruz
+function Sidebar({ isSidebarOpen, theme }) {
+  const isDark = theme === 'dark';
+  const location = useLocation(); // O anki URL bilgisini alır
+
+  const NavLink = ({ item }) => {
+    // Aktif linki URL'e göre belirle
+    const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
+
+    return (
+      <li>
+        {/* DEĞİŞİKLİK 3: <a> etiketi yerine <Link> kullanıldı */}
+        <Link
+          to={item.href}
+          className={`
+            flex items-center space-x-3 px-4 py-2.5 rounded-lg transition-all duration-200
+            ${isActive
+              ? 'bg-indigo-600 text-white font-semibold shadow-lg hover:bg-indigo-700'
+              : isDark 
+                ? 'text-slate-300 hover:bg-slate-800/50' 
+                : 'text-slate-600 hover:bg-slate-100'
+            }
+          `}
+        >
+          <item.icon className='w-5 h-5' />
+          <span>{item.name}</span>
+        </Link>
+      </li>
+    );
+  };
 
   return (
-    <div 
+    <aside 
       className={`
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
         fixed inset-y-0 left-0 z-30 w-64
-        backdrop-blur-xl 
-        border-r
         flex flex-col
-        transition-all duration-300 ease-in-out md:relative md:translate-x-0
+        border-r backdrop-blur-xl 
+        transition-transform duration-300 ease-in-out md:relative md:translate-x-0
         ${isDark 
-          ? 'bg-slate-900 border-slate-700/50' 
-          : 'bg-white border-slate-200/50'
+          ? 'bg-[#212B36] border-slate-700/50' 
+          : 'bg-white/80 border-slate-200/50'
         }
       `}
     >
@@ -75,7 +84,7 @@ function Sidebar({ isSidebarOpen, activeItem, setActiveItem, isDark }) {
         </ul>
       </nav>
 
-      {/* Alt Kısım: Ayarlar ve Çıkış Yap */}
+      {/* Alt Kısım */}
       <div className={`p-4 border-t ${isDark ? 'border-slate-700/50' : 'border-slate-200/50'}`}>
         <ul className='space-y-2'>
           {bottomNavItems.map((item) => (
@@ -83,7 +92,7 @@ function Sidebar({ isSidebarOpen, activeItem, setActiveItem, isDark }) {
           ))}
         </ul>
       </div>
-    </div>
+    </aside>
   );
 }
 

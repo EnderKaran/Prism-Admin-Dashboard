@@ -3,3 +3,78 @@
 .rt-tooltip {
   z-index: 9999 !important;
 }
+
+.rbc-dark .rbc-calendar { @apply bg-slate-800 text-slate-300; }
+.rbc-dark .rbc-header { @apply border-b border-slate-700 text-slate-300; }
+.rbc-dark .rbc-day-bg { @apply border-l border-slate-700; }
+.rbc-dark .rbc-month-view, .rbc-dark .rbc-time-header-content, .rbc-dark .rbc-time-view { @apply border-slate-700; }
+.rbc-dark .rbc-today { @apply bg-slate-700/50; }
+.rbc-dark .rbc-off-range-bg { @apply bg-slate-800/50; }
+.rbc-dark .rbc-event { @apply bg-indigo-500; }
+
+.rbc-calendar {
+  border-radius: 0.5rem; /* 8px */
+  border: none !important;
+  height: 100% !important;
+}
+
+/* Koyu Mod Stilleri */
+.rbc-dark .rbc-calendar {
+  background-color: #1A222C; /* Tasarımdaki ana koyu mavi */
+  color: #A6ADBB; /* Genel metin rengi */
+}
+
+/* Başlık (Gün İsimleri: Sun, Mon, vb.) */
+.rbc-header {
+  border: none;
+  padding: 12px 0;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem; /* 12px */
+  letter-spacing: 0.05em;
+}
+.rbc-dark .rbc-header {
+  color: #E0E1E2;
+  background-color: #212B36; /* Başlık arka planı */
+  border-bottom: 1px solid #39434F !important;
+}
+
+/* Gün Hücreleri ve Çizgiler */
+.rbc-month-view, .rbc-day-bg, .rbc-time-view, .rbc-time-header-content {
+  border-color: #39434F !important; /* Çizgi rengi */
+}
+
+/* Gün Sayıları */
+.rbc-month-row {
+  min-height: 110px; /* Hücre yüksekliği */
+}
+.rbc-date-cell {
+  padding: 8px;
+  text-align: right;
+}
+.rbc-off-range-bg, .rbc-off-range .rbc-day-bg {
+  background: none !important; /* Diğer ayların günlerini karartma */
+}
+.rbc-off-range a {
+  color: #637381 !important; /* Diğer ayların gün sayılarının rengi */
+}
+.rbc-row-segment {
+    padding: 0 4px;
+}
+
+/* Bugünün Tarihi */
+.rbc-today {
+  background-color: transparent;
+}
+.rbc-dark .rbc-day-bg.rbc-today {
+  background-color: #2E3944; /* Bugünün arka plan rengi */
+}
+
+/* Etkinlikler */
+.rbc-event {
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 0.75rem; /* 12px */
+}

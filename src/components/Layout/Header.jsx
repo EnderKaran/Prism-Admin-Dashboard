@@ -40,7 +40,7 @@ function Header({ setSidebarOpen, theme, toggleTheme }) {
   return (
     <div className={`backdrop-blur-xl border-b px-6 py-4 sticky top-0 z-20 transition-all duration-300 ${
       isDark 
-        ? 'bg-slate-900/80 border-slate-700/50' 
+        ? 'bg-[#212B36] border-slate-700/50' 
         : 'bg-white/80 border-slate-200/50'
     }`}>
       <div className='flex items-center justify-between'>

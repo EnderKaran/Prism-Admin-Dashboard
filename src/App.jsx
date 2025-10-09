@@ -1,32 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom'; // 1. Routing için gerekli bileşenleri import et
 import Sidebar from './components/Layout/Sidebar';
 import Header from './components/Layout/Header';
 import DashboardContent from './pages/DashboardContent';
+import CalendarPage from './pages/CalendarPage'; // 2. Yeni takvim sayfasını import et
 import './App.css';
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('Dashboard');
+  
+  // Tema yönetimi (localStorage ile kalıcı hale getirildi)
   const [theme, setTheme] = useState(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
-  const isDark = theme === 'dark';
-
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
-    <div className={`min-h-screen transition-all duration-300 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
+    // Arkaplan rengi artık index.css'ten yönetiliyor
+    <div className='min-h-screen'>
       <div className='flex h-screen overflow-hidden'>
-        <Sidebar 
-          isSidebarOpen={isSidebarOpen} 
-          activeItem={activeItem}
-          setActiveItem={setActiveItem}
-          isDark={isDark}
-        />
+        <Sidebar isSidebarOpen={isSidebarOpen} theme={theme} toggleTheme={toggleTheme} />
         
         {isSidebarOpen && (
           <div 
@@ -40,9 +45,26 @@ function App() {
             setSidebarOpen={setSidebarOpen} 
             theme={theme} 
             toggleTheme={toggleTheme}
-            isDark={isDark}
           />
-          <DashboardContent theme={theme} isDark={isDark} />
+          
+          {/* 3. Sayfa içeriği artık URL'e göre dinamik olarak değişecek */}
+          <main className="flex-1 overflow-y-auto">
+            <Routes>
+              {/* Ana sayfa ve /dashboard için DashboardContent'i göster */}
+              <Route path="/" element={<DashboardContent theme={theme} />} />
+              <Route path="/dashboard" element={<DashboardContent theme={theme} />} />
+              
+              {/* /calendar için CalendarPage'i göster */}
+              <Route path="/calendar" element={<CalendarPage theme={theme} />} />
+
+              {/* Diğer sayfalar için örnekler (henüz oluşturulmadı) */}
+              <Route path="/customers" element={<div>Customers Page</div>} />
+              <Route path="/orders" element={<div>Orders Page</div>} />
+              <Route path="/analytics" element={<div>Analytics Page</div>} />
+              <Route path="/settings" element={<div>Settings Page</div>} />
+            </Routes>
+          </main>
+          
         </div>
       </div>
     </div>
