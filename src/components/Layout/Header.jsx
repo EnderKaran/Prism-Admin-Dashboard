@@ -1,24 +1,41 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Menu, Search, Sun, Moon } from 'lucide-react';
 import NotificationDropdown from '../Dropdowns/NotificationDropdown';
+import ProfileDropdown from '../Dropdowns/ProfileDropdown';
 
 function Header({ setSidebarOpen, theme, toggleTheme }) {
   const isDark = theme === 'dark';
 
   const [isNotificationOpen, setNotificationOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  
   const notificationRef = useRef(null);
+  const profileRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (notificationRef.current && !notificationRef.current.contains(event.target)) {
         setNotificationOpen(false);
       }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [notificationRef]);
+  }, []);
+
+  const toggleNotifications = () => {
+    setNotificationOpen(prev => !prev);
+    setProfileOpen(false);
+  };
+
+  const toggleProfile = () => {
+    setProfileOpen(prev => !prev);
+    setNotificationOpen(false);
+  };
 
   return (
     <div className={`backdrop-blur-xl border-b px-6 py-4 sticky top-0 z-20 transition-all duration-300 ${
@@ -42,6 +59,7 @@ function Header({ setSidebarOpen, theme, toggleTheme }) {
 
         {/* Sağ Bölüm */}
         <div className='flex items-center space-x-2 sm:space-x-4'>
+          {/* Arama Çubuğu */}
           <div className='relative hidden sm:block'>
             <Search className={`w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${
               isDark ? 'text-slate-500' : 'text-slate-400'
@@ -57,7 +75,7 @@ function Header({ setSidebarOpen, theme, toggleTheme }) {
             />
           </div>
 
-          {/* Tema Değiştirme Butonu  */}
+          
           <button 
             onClick={toggleTheme}
             className={`p-2.5 rounded-xl transition-colors ${isDark ? 'text-slate-300 hover:bg-slate-800' : 'text-slate-600 hover:bg-slate-100'}`}
@@ -69,7 +87,7 @@ function Header({ setSidebarOpen, theme, toggleTheme }) {
           {/* Bildirimler Butonu ve Açılır Menü  */}
           <div ref={notificationRef} className="relative">
             <button 
-              onClick={() => setNotificationOpen(prev => !prev)}
+              onClick={toggleNotifications}
               className={`relative p-2.5 rounded-xl transition-colors ${isDark ? 'text-slate-300 hover:bg-slate-800' : 'text-slate-600 hover:bg-slate-100'}`}
             >
               <Bell className='w-5 h-5' />
@@ -82,12 +100,19 @@ function Header({ setSidebarOpen, theme, toggleTheme }) {
             />
           </div>
 
-          {/* Kullanıcı Profili */}
-          <div className='pl-2'>
-            <img 
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs-tinysrgb&w=1600" 
-              alt="User" 
-              className='w-9 h-9 rounded-full cursor-pointer border-2 border-transparent hover:border-indigo-500 transition-colors' 
+          {/* Kullanıcı Profili ve Açılır Menü  */}
+          <div ref={profileRef} className="relative pl-2">
+            <button onClick={toggleProfile}>
+              <img 
+                src="https://images.pexels.com/photos/2228570/pexels-photo-2228570.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="User" 
+                className='w-9 h-9 rounded-full cursor-pointer border-2 border-transparent hover:border-indigo-500 transition-colors' 
+              />
+            </button>
+            <ProfileDropdown 
+              isOpen={isProfileOpen} 
+              onClose={() => setProfileOpen(false)}
+              theme={theme}
             />
           </div>
         </div>
