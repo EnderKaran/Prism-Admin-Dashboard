@@ -2,6 +2,7 @@ import React from 'react';
 import StatCard from '../components/StatCard';
 import StatisticsChart from '../components/Charts/StatisticsChart';
 import DemographicsMap from '../components/Charts/DemographicsMap';
+import RecentOrders from '../components/Tables/RecentOrders';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const monthlySalesData = [
@@ -121,7 +122,7 @@ function DashboardContent({ theme }) {
         </div>
         
         <div className="lg:col-span-2">
-            {/* Boş Alan */}
+             <RecentOrders isDark={isDark} />
         </div>
       </div>
 
