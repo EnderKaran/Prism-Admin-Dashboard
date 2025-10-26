@@ -5,6 +5,7 @@ import Header from './components/Layout/Header';
 import DashboardContent from './pages/DashboardContent';
 import CalendarPage from './pages/CalendarPage';
 import ProfilePage from './pages/ProfilePage';
+import CustomersPage from './pages/CustomersPage'; // YENİ
 import './App.css';
 
 function App() {
@@ -37,11 +38,11 @@ function App() {
         {isSidebarOpen && (
           <div 
             onClick={() => setSidebarOpen(false)} 
-            className="fixed inset-0 bg-black/50 z-20 md:hidden"
+            className="fixed inset-0 z-20 bg-black/50 md:hidden"
           ></div>
         )}
 
-        <div className='flex-1 flex flex-col overflow-hidden'>
+        <div className='flex flex-col flex-1 overflow-hidden'>
           <Header 
             setSidebarOpen={setSidebarOpen} 
             theme={theme} 
@@ -56,7 +57,7 @@ function App() {
               <Route path="/dashboard" element={<DashboardContent theme={theme} />} />
               
               <Route path="/calendar" element={<CalendarPage theme={theme} />} />
-              <Route path="/customers" element={<div>Customers Page</div>} />
+              <Route path="/customers" element={<CustomersPage theme={theme} />} />
               <Route path="/orders" element={<div>Orders Page</div>} />
               <Route path="/analytics" element={<div>Analytics Page</div>} />
               <Route path="/settings" element={<div>Settings Page</div>} />
