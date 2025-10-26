@@ -18,7 +18,10 @@ Canlı Demoyu Görüntüle: [https://enderkaran.github.io/Prism-Admin-Dashboard/
 ### 2. Yönetim Sayfaları
 - **Takvim (CalendarPage):** React Big Calendar kullanılarak oluşturulmuş, etkinlik ekleme, düzenleme ve görüntüleme özelliklerine sahip tam fonksiyonel takvim sayfası.  
 - **Profil Sayfası (ProfilePage):** Kullanıcıların kişisel bilgilerini ve adreslerini görüntüleyebileceği, modal pencereler üzerinden düzenleyebileceği profil yönetim sayfası.  
-- **Sipariş Listesi (RecentOrders):** Son siparişleri ürün görselleri, fiyatları ve durumları (Teslim Edildi, Beklemede, İptal) ile birlikte listeleyen modern tablo.  
+- **Müşteri Yönetimi (CustomersPage):** Müşteri listesini arama, filtreleme ve görüntüleme özellikleriyle sunan tam bir müşteri veritabanı sayfası.
+- **Sipariş Yönetimi (OrdersPage):** Tüm siparişleri listelemek için arama, duruma göre filtreleme (Teslim Edildi, Beklemede vb.) ve sayfalama özelliklerine sahip kapsamlı sipariş tablosu.
+- **Analiz Sayfası (AnalyticsPage):** Trafik kaynakları, kategoriye göre satışlar ve demografik haritalar gibi birden fazla veri görselleştirmesini bir araya getiren detaylı analiz ekranı.
+- **Ayarlar Sayfası (SettingsPage):** Kullanıcıların hesap (şifre değişikliği), bildirim tercihleri ve tema (görünüm) ayarlarını yönetebileceği sekmeli ayarlar menüsü.
 
 ### 3. Kullanıcı Arayüzü ve Deneyimi
 - **Aydınlık ve Karanlık Mod:** Tek bir tıklama ile uygulama genelinde tema değiştirmeye olanak tanıyan tam tema desteği.  
@@ -64,35 +67,42 @@ Proje, sorumlulukların ayrılması ilkesine dayanan, ölçeklenebilir ve bakım
 Prism-Admin-Dashboard/
 ├── node_modules/
 ├── public/
-│   └── 404.html                 # GitHub Pages yönlendirme dosyası
+│   └── 404.html              # GitHub Pages yönlendirme dosyası
 ├── src/
-│   ├── assets/                  # Görseller, fontlar vb.
+│   ├── assets/               # Görseller, fontlar vb.
 │   ├── components/
-│   │   ├── Charts/              # Grafik bileşenleri
+│   │   ├── Charts/           # Grafik bileşenleri
 │   │   │   ├── DemographicsMap.jsx
 │   │   │   └── StatisticsChart.jsx
-│   │   ├── Dropdowns/           # Açılır menü bileşenleri
+│   │   ├── Dropdowns/        # Açılır menü bileşenleri
 │   │   │   ├── NotificationDropdown.jsx
 │   │   │   └── ProfileDropdown.jsx
-│   │   ├── Form/                # Form elemanları
-│   │   │   └── FormInput.jsx
-│   │   ├── Layout/              # Sayfa düzeni bileşenleri
+│   │   ├── Form/             # Form elemanları
+│   │   │   ├── FormInput.jsx
+│   │   │   └── ToggleSwitch.jsx
+│   │   ├── Layout/           # Sayfa düzeni bileşenleri
 │   │   │   ├── Header.jsx
 │   │   │   └── Sidebar.jsx
-│   │   ├── Modals/              # Modal bileşenleri
+│   │   ├── Modals/           # Modal bileşenleri
 │   │   │   ├── EditAddressModal.jsx
 │   │   │   ├── EditPersonalInfoModal.jsx
 │   │   │   └── EventModal.jsx
-│   │   └── Tables/              # Tablo bileşenleri
+│   │   └── Tables/           # Tablo bileşenleri
+│   │       ├── CustomersTable.jsx
+│   │       ├── OrdersTable.jsx
 │   │       ├── RecentOrders.jsx
 │   │       └── StatCard.jsx
-│   ├── pages/                   # Sayfa bileşenleri
+│   ├── pages/                # Sayfa bileşenleri
+│   │   ├── AnalyticsPage.jsx
 │   │   ├── CalendarPage.jsx
+│   │   ├── CustomersPage.jsx
 │   │   ├── DashboardContent.jsx
-│   │   └── ProfilePage.jsx
-│   ├── App.css                  # Global stil ve takvim özelleştirmeleri
-│   ├── App.jsx                  # Ana bileşen ve yönlendirme
-│   └── main.jsx                 # Uygulamanın giriş noktası
+│   │   ├── OrdersPage.jsx
+│   │   ├── ProfilePage.jsx
+│   │   └── SettingsPage.jsx
+│   ├── App.css               # Global stil ve takvim özelleştirmeleri
+│   ├── App.jsx               # Ana bileşen ve yönlendirme
+│   └── main.jsx              # Uygulamanın giriş noktası
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
