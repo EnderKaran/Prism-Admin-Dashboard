@@ -4,7 +4,7 @@ import StatCard from '../components/StatCard';
 import StatisticsChart from '../components/Charts/StatisticsChart';
 import DemographicsMap from '../components/Charts/DemographicsMap';
 
-// Sahte (mock) veri (Değişiklik yok)
+// Sahte (mock) veri
 const trafficData = [
   { name: 'Google', value: 400 },
   { name: 'Facebook', value: 300 },
@@ -29,7 +29,6 @@ function AnalyticsPage({ theme }) {
   const tooltipTextColor = isDark ? '#cbd5e1' : '#334155';
   
   return (
-    // DEĞİŞİKLİK: <main> etiketi kaldırıldı, React Fragment (<>) ile değiştirildi
     <>
       {/* Sayfa Başlığı ve Breadcrumb */}
       <div className="flex items-center justify-between mb-8">
@@ -80,7 +79,7 @@ function AnalyticsPage({ theme }) {
               </PieChart>
             </ResponsiveContainer>
           </div>
-  _       <div className="flex flex-wrap justify-center gap-4 mt-4">
+          <div className="flex flex-wrap justify-center gap-4 mt-4">
             {trafficData.map((entry, index) => (
               <div key={entry.name} className="flex items-center space-x-2">
                 <span className="w-3 h-3 rounded-full" style={{ backgroundColor: TRAFFIC_COLORS[index] }}></span>
@@ -99,15 +98,15 @@ function AnalyticsPage({ theme }) {
                 <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: axisTickColor, fontSize: 12 }} />
                 <YAxis tickLine={false} axisLine={false} tick={{ fill: axisTickColor, fontSize: 12 }} />
                 <Tooltip 
-                  cursor={{ fill: isDark ? 'rgba(100, 116, 139, 0.2)' : 'rgba(100, 116, 139, 0.1)' }}
+                   cursor={{ fill: isDark ? 'rgba(100, 116, 139, 0.2)' : 'rgba(100, 116, 139, 0.1)' }}
                   contentStyle={{ 
                     backgroundColor: tooltipBg, 
-                   border: `1px solid ${tooltipBorder}`,
-                    borderRadius: '0.75rem',
+                    border: `1px solid ${tooltipBorder}`,
+                     borderRadius: '0.75rem',
                     color: tooltipTextColor
-                 }} 
+                  }} 
                 />
-          _     <Bar dataKey="sales" fill="#6366F1" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="sales" fill="#6366F1" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -115,7 +114,7 @@ function AnalyticsPage({ theme }) {
       </div>
       
       {/* Demografi Haritası */}
-      <div className={`mt-8 p-6 rounded-xl border shadow-sm ${isDark ? 'bg-slate-800 border-slate-700/50' : 'bg-white border-slate-200/50'} h-[500px] overflow-hidden`}>
+      <div className="mt-8">
         <DemographicsMap isDark={isDark} />
       </div>
 
