@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // GÜNCELLENDİ: useEffect eklendi
+import React, { useState, useEffect } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -11,7 +11,7 @@ import EventModal from '../components/Modals/EventModal';
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid'; 
 
-// locales, localizer, initialEvents (Değişiklik yok)
+// locales, localizer, initialEvents
 const locales = { 'en-US': enUS };
 const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales });
 const initialEvents = [
@@ -62,7 +62,6 @@ function CalendarPage({ theme }) {
   });
 
   return (
-    // GÜNCELLENDİ: Gereksiz <main> etiketi kaldırıldı
     <>
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         {/* Sol Navigasyon Butonları */}
@@ -132,7 +131,7 @@ function CalendarPage({ theme }) {
         />
       </div>
       
-      {/* Modal (Değişiklik yok) */}
+      {/* Modal */}
       <EventModal 
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
