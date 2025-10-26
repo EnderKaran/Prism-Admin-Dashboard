@@ -3,13 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Layout/Sidebar';
 import Header from './components/Layout/Header';
 
-// Oluşturulan sayfaları import et
 import DashboardContent from './pages/DashboardContent';
 import CalendarPage from './pages/CalendarPage';
 import ProfilePage from './pages/ProfilePage';
 import CustomersPage from './pages/CustomersPage'; 
 import OrdersPage from './pages/OrdersPage';     
-import AnalyticsPage from './pages/AnalyticsPage'; 
+import AnalyticsPage from './pages/AnalyticsPage';
+import SettingsPage from './pages/SettingsPage';
 
 import './App.css';
 
@@ -69,7 +69,7 @@ function App() {
               <Route path="/customers" element={<CustomersPage theme={theme} />} />
               <Route path="/orders" element={<OrdersPage theme={theme} />} />
               <Route path="/analytics" element={<AnalyticsPage theme={theme} />} />
-              <Route path="/settings" element={<div>Settings Page</div>} />
+              <Route path="/settings" element={<SettingsPage theme={theme} toggleTheme={toggleTheme} />} />             
               <Route path="/profile" element={<ProfilePage theme={theme} />} />
             </Routes>
           </main>

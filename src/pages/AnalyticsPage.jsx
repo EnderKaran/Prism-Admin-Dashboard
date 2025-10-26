@@ -111,9 +111,9 @@ function AnalyticsPage({ theme }) {
             </ResponsiveContainer>
           </div>
         </div>
-      </div>
+      </div> 
       
-      {/* Demografi Haritası */}
+      {/* Demografi Haritası */} 
       <div className="mt-8">
         <DemographicsMap isDark={isDark} />
       </div>
