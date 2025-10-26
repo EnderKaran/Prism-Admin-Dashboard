@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MoreVertical, Search, Filter } from 'lucide-react';
 
-// Sahte (mock) müşteri verisi
 const customersData = [
   {
     id: 1,
@@ -62,6 +61,15 @@ const statusColors = {
 };
 
 function CustomersTable({ isDark }) {
+  // Arama terimini tutmak için state
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Arama terimine göre müşterileri filtrele
+  const filteredCustomers = customersData.filter(customer =>
+    customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={`p-6 rounded-xl border shadow-sm transition-colors duration-300 ${
         isDark 
@@ -76,7 +84,9 @@ function CustomersTable({ isDark }) {
             <Search className={`w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDark ? 'text-slate-500' : 'text-slate-400'}`} />
             <input 
               type="text" 
-              placeholder="Search customer..." 
+              placeholder="Search customer..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className={`w-full pl-10 pr-4 py-2 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
                 isDark 
                   ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-500' 
@@ -105,7 +115,7 @@ function CustomersTable({ isDark }) {
           </div>
 
           {/* Müşteri Öğeleri */}
-          {customersData.map((customer) => (
+          {filteredCustomers.map((customer) => (
             <div key={customer.id} className={`grid grid-cols-12 gap-4 items-center p-4 rounded-lg transition-colors text-sm ${isDark ? 'hover:bg-slate-700/50 text-slate-300' : 'hover:bg-slate-50 text-slate-700'}`}>
               
               {/* Müşteri */}
@@ -142,7 +152,8 @@ function CustomersTable({ isDark }) {
       {/* Sayfalama (Pagination) */}
       <div className="flex items-center justify-between pt-4 mt-4 border-t">
         <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-          Showing 1-5 of 5 customers
+          {/*Dinamik olarak sonuç sayısını göster */}
+          Showing {filteredCustomers.length} results
         </span>
         <div className="flex items-center space-x-1">
           <button className={`px-2.5 py-1 text-sm rounded-md ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Previous</button>
